@@ -1,6 +1,6 @@
 Current bugs:
 
-* Loop with retype yes or no is not working.
+* Loop with retype yes or no is not working.(resolved)
 * When it goes again for another round, plays one player instead of same version
 * 
 

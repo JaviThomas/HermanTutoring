@@ -81,7 +81,7 @@ def restartAfterPlay(result):
 		'one_loss': "Congrats player 2, you win!"
 		}
 	playAgain = input(names[result] + ", play again? (yes/no)\n")
-	if not playAgain == "yes" or "no":
+	if not (playAgain == "yes" or "no"):
 		playAgain = input("Retype yes or no.")
 
 	if playAgain == "yes":
