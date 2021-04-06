@@ -1,4 +1,6 @@
 import random
+from getpass import getpass
+
 
 
 def gameSelectionTwoPlayer():
@@ -13,11 +15,11 @@ def gameSelectionTwoPlayer():
 			pass
 		else:
 			selection = input("that didn't look right. Please try again.\n")
-		return selection
+			validateChoice(selection)
 
-	player_1 = input("rock, paper, scissors\n")
+	player_1 = getpass("rock, paper, scissors\n")
 	validateChoice(player_1)
-	player_2 = input("Player 2, now its your turn, what do you choose? \n rock, paper, scissors\n")
+	player_2 = getpass("Player 2, now its your turn, what do you choose? \nrock, paper, scissors\n")
 	validateChoice(player_2)
 
 	# computer has options 0,1,2
@@ -71,24 +73,6 @@ def gameMode(decision):
 		gameMode(decision)
 
 
-def restartAfterPlay(result):
-	names = {
-		"User_win": "Congratulations you win!!!",
-		'User_tie': "Nobody wins ;(",
-		"User_loss": "you lose too bad xD",
-		'one_win': "Congrats player 1, you win!",
-		'one_tie': "looks like you both think the same, its a tie!",
-		'one_loss': "Congrats player 2, you win!"
-		}
-	playAgain = input(names[result] + ", play again? (yes/no)\n")
-	if not (playAgain == "yes" or "no"):
-		playAgain = input("Retype yes or no.")
-
-	if playAgain == "yes":
-		gameSelectionOnePlayer()
-	else:
-		print("bye bye!")
-
 
 def gameSelectionOnePlayer():
 
@@ -137,9 +121,29 @@ def gameSelectionOnePlayer():
 			restartAfterPlay("User_tie")
 
 
+def restartAfterPlay(result):
+	names = {
+		"User_win": "Congratulations you win!!!",
+		'User_tie': "Nobody wins ;(",
+		"User_loss": "you lose too bad xD",
+		'one_win': "Congrats player 1, you win!",
+		'one_tie': "looks like you both think the same, its a tie!",
+		'one_loss': "Congrats player 2, you win!"
+	}
+	playAgain = input(names[result] + "\nPlay one player [1] \nPlay two player [2] \nExit![0]\n")
 
+	if not (playAgain == 0 or 1 or 2):
+		playAgain = input("Please retype selection, 0,1 or 2")
 
-
+	if playAgain == "0":
+		print("Bye bye!")
+		exit()
+	elif playAgain == "1":
+		print("begin 1 player")
+		gameSelectionOnePlayer()
+	elif playAgain == "2":
+		print("begin 2 player")
+		gameSelectionTwoPlayer()
 
 
 #random. rock, paper, scissors

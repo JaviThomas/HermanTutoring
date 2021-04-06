@@ -7,4 +7,4 @@ import re
 print("ok lets do some things!")
 
 x = gameStart()
-print(x)
+
