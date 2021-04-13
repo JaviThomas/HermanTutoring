@@ -28,26 +28,33 @@ def gameSelectionTwoPlayer():
 		if player_2 == "rock":
 			restartAfterPlay("one_tie")
 		elif player_2 == "paper":
+			gameScore.computerUp()
 			restartAfterPlay("one_loss")
 		else:
+			gameScore.userUp()
 			restartAfterPlay("one_win")
 
 	if player_1 == "paper":
 		if player_2 == "rock":
+			gameScore.userUp()
 			restartAfterPlay("one_win")
 		elif player_2 == "paper":
 			restartAfterPlay("one_tie")
 		else:
+			gameScore.computerUp()
 			restartAfterPlay("one_loss")
 
 	if player_1 == "scissors":
 		if player_2 == "rock":
+			gameScore.computerUp()
 			restartAfterPlay("one_loss")
 		elif player_2 == "paper":
+			gameScore.userUp()
 			restartAfterPlay("one_win")
 		else:
 			restartAfterPlay("one_tie")
 
+	game2Score.showScore2player()
 
 def gameStart():
 	print("Welcome to the Game." + "Are you ready to play?")
@@ -100,22 +107,28 @@ def gameSelectionOnePlayer():
 		if computerSelection == "rock":
 			restartAfterPlay("User_tie")
 		elif computerSelection == "paper":
+			gameScore.computerUp()
 			restartAfterPlay("User_loss")
 		else:
+			gameScore.userUp()
 			restartAfterPlay("User_win")
 
 	if userSelection == "paper":
 		if computerSelection == "rock":
+			gameScore.userUp()
 			restartAfterPlay("User_win")
 		elif computerSelection == "paper":
 			restartAfterPlay("User_tie")
 		else:
+			gameScore.computerUp()
 			restartAfterPlay("User_loss")
 
 	if userSelection == "scissors":
 		if computerSelection == "rock":
+			gameScore.computerUp()
 			restartAfterPlay("User_loss")
 		elif computerSelection == "paper":
+			gameScore.userUp()
 			restartAfterPlay("User_win")
 		else:
 			restartAfterPlay("User_tie")
@@ -130,6 +143,11 @@ def restartAfterPlay(result):
 		'one_tie': "looks like you both think the same, its a tie!",
 		'one_loss': "Congrats player 2, you win!"
 	}
+	if names == "User_win" or "User_loss" or "User_tie":
+		gameScore.showScore1player()
+	else:
+		game2Score.showScore2player()
+
 	playAgain = input(names[result] + "\nPlay one player [1] \nPlay two player [2] \nExit![0]\n")
 
 	if not (playAgain == 0 or 1 or 2):
@@ -151,3 +169,22 @@ def restartAfterPlay(result):
 #if computer chooses rock and I chose scissors
 
 #computer wins
+class scoreBoard:
+	score1player = [0, 0]
+	def showScore1player(self):
+		print("Player 1 has %d points, Computer has %d points" % tuple(self.score1player))
+
+	def showScore2player(self):
+		print("Player 1 has %d points, Player 2 has %d points" % tuple(self.score1player))
+
+	@classmethod
+	def computerUp(cls, i = score1player):
+		i[1] += 1
+
+	@classmethod
+	def userUp(cls, i = score1player):
+		i[0] += 1
+
+gameScore = scoreBoard()
+
+game2Score = scoreBoard()
