@@ -28,33 +28,33 @@ def gameSelectionTwoPlayer():
 		if player_2 == "rock":
 			restartAfterPlay("one_tie")
 		elif player_2 == "paper":
-			gameScore.computerUp()
+			game2Score.computerUp()
 			restartAfterPlay("one_loss")
 		else:
-			gameScore.userUp()
+			game2Score.userUp()
 			restartAfterPlay("one_win")
 
 	if player_1 == "paper":
 		if player_2 == "rock":
-			gameScore.userUp()
+			game2Score.userUp()
 			restartAfterPlay("one_win")
 		elif player_2 == "paper":
 			restartAfterPlay("one_tie")
 		else:
-			gameScore.computerUp()
+			game2Score.computerUp()
 			restartAfterPlay("one_loss")
 
 	if player_1 == "scissors":
 		if player_2 == "rock":
-			gameScore.computerUp()
+			game2Score.computerUp()
 			restartAfterPlay("one_loss")
 		elif player_2 == "paper":
-			gameScore.userUp()
+			game2Score.userUp()
 			restartAfterPlay("one_win")
 		else:
 			restartAfterPlay("one_tie")
 
-	game2Score.showScore2player()
+
 
 def gameStart():
 	print("Welcome to the Game." + "Are you ready to play?")
@@ -143,7 +143,7 @@ def restartAfterPlay(result):
 		'one_tie': "looks like you both think the same, its a tie!",
 		'one_loss': "Congrats player 2, you win!"
 	}
-	if names == "User_win" or "User_loss" or "User_tie":
+	if result in ["User_win", "User_tie", "User_loss"]:
 		gameScore.showScore1player()
 	else:
 		game2Score.showScore2player()
