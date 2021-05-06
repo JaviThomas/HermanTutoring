@@ -4,6 +4,6 @@ Current bugs:
 
 Things we want to add:
 
-* Scoreboard
+*Clear terminal window after game start so it looks cleaner
 * Personalization for names, so user can type their name use it later
 * Game menu

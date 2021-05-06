@@ -1,10 +1,20 @@
 import random
 from getpass import getpass
 
+name1 = ""
+name2 = ""
+
 
 
 def gameSelectionTwoPlayer():
-	print("Player 1, what do you choose? Don't show player two!")
+
+	global name1
+	name1 = input("Please type in name Player 1.")
+
+	global name2
+	name2 = input("Please type in name Player 2.")
+
+	print("%s, what do you choose? Don't show %s!"%(name1,name2))
 
 	def validateChoice(selection):
 		if selection == "rock":
@@ -19,7 +29,7 @@ def gameSelectionTwoPlayer():
 
 	player_1 = getpass("rock, paper, scissors\n")
 	validateChoice(player_1)
-	player_2 = getpass("Player 2, now its your turn, what do you choose? \nrock, paper, scissors\n")
+	player_2 = getpass("%s, now its your turn, what do you choose? \nrock, paper, scissors\n"%name2)
 	validateChoice(player_2)
 
 	# computer has options 0,1,2
@@ -57,7 +67,7 @@ def gameSelectionTwoPlayer():
 
 
 def gameStart():
-	print("Welcome to the Game." + "Are you ready to play?")
+	print("Welcome to the Game. Are you ready to play?")
 	user = input("yes/no\n")
 	if user == "yes":
 		decision = input("Do you want to play [1] player/ [2] player?\n")
@@ -83,7 +93,10 @@ def gameMode(decision):
 
 def gameSelectionOnePlayer():
 
-	print("which do you choose?")
+	global name1
+	name1 = input("Please type in name.")
+
+	print(name1 + ", which do you choose?")
 	#which do you pick? rock, paper, scissors
 
 	userSelection = input("rock, paper, scissors\n")
@@ -136,12 +149,12 @@ def gameSelectionOnePlayer():
 
 def restartAfterPlay(result):
 	names = {
-		"User_win": "Congratulations you win!!!",
+		"User_win": "Congratulations %s you win!!!"%name1,
 		'User_tie': "Nobody wins ;(",
 		"User_loss": "you lose too bad xD",
-		'one_win': "Congrats player 1, you win!",
+		'one_win': "Congrats %s, you win!"%name1,
 		'one_tie': "looks like you both think the same, its a tie!",
-		'one_loss': "Congrats player 2, you win!"
+		'one_loss': "Congrats %s, you win!"%name2
 	}
 	if result in ["User_win", "User_tie", "User_loss"]:
 		gameScore.showScore1player()
@@ -170,20 +183,22 @@ def restartAfterPlay(result):
 
 #computer wins
 class scoreBoard:
-	score1player = [0, 0]
-	def showScore1player(self):
-		print("Player 1 has %d points, Computer has %d points" % tuple(self.score1player))
 
-	def showScore2player(self):
-		print("Player 1 has %d points, Player 2 has %d points" % tuple(self.score1player))
+    def __init__(self):
+        self.score1player = [0, 0]
 
-	@classmethod
-	def computerUp(cls, i = score1player):
-		i[1] += 1
+    def showScore1player(self):
+        print("Player 1 has %d points, Computer has %d points" % tuple(self.score1player))
 
-	@classmethod
-	def userUp(cls, i = score1player):
-		i[0] += 1
+    def showScore2player(self):
+        print("Player 1 has %d points, Player 2 has %d points" % tuple(self.score1player))
+
+    def computerUp(self):
+        self.score1player[1] += 1
+
+    def userUp(self):
+        self.score1player[0] += 1
+
 
 gameScore = scoreBoard()
 
